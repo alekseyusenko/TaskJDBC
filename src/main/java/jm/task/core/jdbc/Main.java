@@ -13,9 +13,8 @@ public class Main {
         userServiceImpl.saveUser("Alexander", "Sidorov", (byte)56);
         userServiceImpl.saveUser("Nikolay", "Tarasov", (byte)33);
         List<User> users = userServiceImpl.getAllUsers();
-        for (User user : users) {
-            System.out.println(user);
-        } //можно и стримом, но у темплейта версия 1.8, поэтому пускай будет так, вдруг чего сломается
+        userServiceImpl.getAllUsers().stream().
+                forEach(System.out::println);
         userServiceImpl.cleanUsersTable();
         userServiceImpl.dropUsersTable();
     }
