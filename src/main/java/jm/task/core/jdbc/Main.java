@@ -13,7 +13,7 @@ public class Main {
         userServiceImpl.saveUser("Alexander", "Sidorov", (byte)56);
         userServiceImpl.saveUser("Nikolay", "Tarasov", (byte)33);
         List<User> users = userServiceImpl.getAllUsers();
-        userServiceImpl.getAllUsers().stream().
+        userServiceImpl.getAllUsers().
                 forEach(System.out::println);
         userServiceImpl.cleanUsersTable();
         userServiceImpl.dropUsersTable();
