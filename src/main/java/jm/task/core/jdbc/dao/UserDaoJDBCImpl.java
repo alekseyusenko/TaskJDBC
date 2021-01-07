@@ -124,13 +124,13 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
     public List<User> getAllUsers() {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-
+        ResultSet rs = null;
         List<User> userList = new LinkedList<>();
 
         try {
             connection = getConnection();
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM User");
+            rs = stmt.executeQuery("SELECT * FROM User");
             while (rs.next()) {
                 String name = rs.getString("name");
                 String lastName = rs.getString("lastName");
@@ -142,6 +142,11 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ignore) {}
+            }            
             if (preparedStatement != null) {
                 try {
                     preparedStatement.close();
